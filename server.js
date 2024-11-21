@@ -1,30 +1,10 @@
 import express from "express";
-
-const posts = [
-  { id: 1, descricao: "Um gato adorável tomando sol.", imgUrl: "https://placecats.com/sunny/200/300" },
-  { id: 2, descricao: "Um gato adorável tomando sol.", imgUrl: "https://placecats.com/sunny/200/300" },
-  { id: 3, descricao: "Um gato adorável tomando sol.", imgUrl: "https://placecats.com/sunny/200/300" },
-];
+import routes from "./src/Routes/postRoutes.js";
 
 const app = express();
-app.use(express.json());
+routes(app)
 
 app.listen(3000, () => {
   console.log("Servidor escutando...");
 });
-
-app.get("/posts", (req, res) => {
-  res.status(200).json(posts);
-});
-
-function buscarPostPorID(id) {
-  return posts.findIndex((post) => {
-    return post.id === Number(id) 
-  })
-}
-
-app.get("/posts/:id", (req, res) => {
-  const index = buscarPostPorID(req.params.id)
-  res.status(200).json(posts[index]);
-
-});
+// Inicia o servidor na porta 3000 e exibe uma mensagem no console indicando que está pronto para receber requisições
