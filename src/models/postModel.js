@@ -4,7 +4,7 @@ import conectarAoBanco from "../config/dbConfig.js";
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 // Função assíncrona para buscar todos os posts do banco de dados
 
-export default async function getTodosposts() {
+export async function getTodosPosts() {
     // Obtém o banco de dados específico dentro da conexão
     const db = conexao.db("imersao-projetoinstaalura");
     // Seleciona a coleção "posts" onde os dados serão armazenados
@@ -12,3 +12,8 @@ export default async function getTodosposts() {
     // Realiza uma consulta para encontrar todos os documentos na coleção e retorna os resultados como um array
     return colecao.find().toArray(); 
   }  
+  export async function criarPost(novoPost) {
+      const db = conexao.db("imersao-projetoinstaalura");
+      const colecao = db.collection("posts");
+      return colecao.insertOne(novoPost)
+  }
